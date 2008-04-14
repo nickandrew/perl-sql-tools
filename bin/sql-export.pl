@@ -13,7 +13,7 @@
 use DBI qw();
 use Getopt::Std qw(getopts);
 
-use vars qw($opt_d $opt_l $opt_t);
+use vars qw($opt_d $opt_l $opt_p $opt_t);
 
 my $driver = $ENV{DB_DRIVER} || 'mysql';
 my $host = $ENV{DB_HOST} || '';
@@ -25,7 +25,7 @@ if ($host) {
 	$options = "host=$host;" . $options;
 }
 
-getopts('d:l:t');
+getopts('d:l:pt');
 
 my $database = $opt_d || $ENV{DB_DATABASE};
 my $statement = shift @ARGV || usage();
@@ -59,7 +59,12 @@ my @keys;
 my @fieldlist;
 
 while (defined ($row_hr = $sth->fetchrow_hashref())) {
-	print_pipe();
+
+	if ($opt_p) {
+		print_para();
+	} else {
+		print_pipe();
+	}
 
 	if ($opt_l > 0) {
 		$opt_l--;
