@@ -105,3 +105,40 @@ exit(0);
 sub usage {
 	die "Usage: sql-export.pl database 'statement' > output\n";
 }
+
+sub print_pipe {
+	if (!@fieldlist) {
+
+		# Grab the field names
+
+		foreach my $k (sort (keys %$row_hr)) {
+			push(@fieldlist, lc($k));
+			push(@keys, $k);
+		}
+
+		print join('|', @fieldlist), "\n";
+	}
+
+	# Output the row
+
+	foreach my $k (@keys) {
+		if ($row_hr->{$k} =~ /\||\n/) {
+			die "Pipe or newline in data field $k";
+		}
+	}
+
+	print join('|', (map { $row_hr->{$_} } @keys)), "\n";
+}
+
+sub print_para {
+	foreach my $k (sort (keys %$row_hr)) {
+		my $v = $row_hr->{$k};
+		if ($v =~ /\n/) {
+			die "newline in data field $k";
+		}
+
+		printf "%s: %s\n", $k, $v;
+	}
+
+	print "\n";
+}
