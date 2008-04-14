@@ -59,28 +59,7 @@ my @keys;
 my @fieldlist;
 
 while (defined ($row_hr = $sth->fetchrow_hashref())) {
-
-	if (!@fieldlist) {
-
-		# Grab the field names
-
-		foreach my $k (sort (keys %$row_hr)) {
-			push(@fieldlist, lc($k));
-			push(@keys, $k);
-		}
-
-		print join('|', @fieldlist), "\n";
-	}
-
-	# Output the row
-
-	foreach my $k (@keys) {
-		if ($row_hr->{$k} =~ /\||\n/) {
-			die "Pipe or newline in data field $k";
-		}
-	}
-
-	print join('|', (map { $row_hr->{$_} } @keys)), "\n";
+	print_pipe();
 
 	if ($opt_l > 0) {
 		$opt_l--;
