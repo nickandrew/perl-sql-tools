@@ -1,0 +1,33 @@
+#!/bin/bash
+#	Update private locatedb file with all nick's files
+#
+#  The output format differs between locate, mlocate and slocate
+#  so choose one depending on which package is installed.
+
+H=$(hostname)
+
+# if [ $H != 'marcab.local.tull.net' ] ; then
+# 	echo Must run on marcab.local.tull.net
+# 	exit 8
+# fi
+
+#updatedb --output=$HOME/etc/locatedb --netpaths='/home/nick /home/nick.extra' --database-root='/marcab/nick'
+
+if [ -e /usr/bin/mlocate ] ; then
+	PREFIX=mlocate
+elif [ -e /usr/sbin/slocate ] ; then
+	PREFIX=slocate
+else
+	PREFIX=locate
+fi
+
+if [ $H = 'xenu.local.tull.net' ] ; then
+	updatedb --output=$HOME/etc/${PREFIX}-nick --database-root='/home/nick'
+	updatedb --output=$HOME/etc/${PREFIX}-nick.extra --database-root='/home/nick.extra'
+fi
+
+
+if [ -d /import/media3 ] ; then
+	updatedb --output=$HOME/etc/${PREFIX}-media --database-root="/import/media3"
+fi
+
