@@ -21,13 +21,13 @@ else
 	PREFIX=locate
 fi
 
-if [ $H = 'xenu.local.tull.net' ] ; then
-	updatedb --output=$HOME/etc/${PREFIX}-nick --database-root='/home/nick'
-	updatedb --output=$HOME/etc/${PREFIX}-nick.extra --database-root='/home/nick.extra'
+if [ $H = 'marcab.local.tull.net' ] ; then
+	updatedb -l 0 --output=$HOME/etc/${PREFIX}-nick --database-root='/home/nick'
+	updatedb -l 0 --output=$HOME/etc/${PREFIX}-nick.extra --database-root='/home/nick.extra'
 fi
 
 
 if [ -d /import/media3 ] ; then
-	updatedb --output=$HOME/etc/${PREFIX}-media --database-root="/import/media3"
+	updatedb -l 0 --output=$HOME/etc/${PREFIX}-media --database-root='/import/media3'
 fi
 
