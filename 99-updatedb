@@ -31,3 +31,7 @@ if [ -d /import/media3 ] ; then
 	updatedb -l 0 --output=$HOME/etc/${PREFIX}-media --database-root='/import/media3'
 fi
 
+if [ -d /import/pics ] ; then
+	updatedb -l 0 --output=$HOME/etc/${PREFIX}-pics --database-root='/import/pics'
+fi
+
