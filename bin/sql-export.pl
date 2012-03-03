@@ -87,7 +87,7 @@ if ($rv != 1) {
 exit(0);
 
 sub usage {
-	die "Usage: sql-export.pl database 'statement' > output\n";
+	die "Usage: sql-export.pl -d database 'statement' > output\n";
 }
 
 sub print_pipe {
