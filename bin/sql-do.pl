@@ -1,8 +1,11 @@
 #!/usr/bin/perl
-#	@(#) sql-export.pl - Dump the results of a select statement to stdout
+#   @(#) sql-do.pl - Dump the results of a select statement to stdout
 #
 # Usage: sql-do.pl [-d database] 'statement'
 #
+
+use strict;
+use warnings;
 
 use DBI qw();
 use Getopt::Std qw(getopts);

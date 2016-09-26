@@ -1,12 +1,15 @@
 #!/usr/bin/perl
-#	@(#) sql-insert-para.pl - Control-file-driven bulk insertion
+#   @(#) sql-insert-para.pl - Control-file-driven bulk insertion
 #
 # Usage: sql-insert-para.pl tablename < inputfile
 #
 # Input file format:
-#	fieldname: value
-#	fieldname: value
-#	etc... empty line to end the row.
+#   fieldname: value
+#   fieldname: value
+#   etc... empty line to end the row.
+
+use strict;
+use warnings;
 
 use SQL qw();
 use Getopt::Std qw(getopts);
