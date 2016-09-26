@@ -1,7 +1,7 @@
 #!/usr/bin/perl
-#   @(#) sql-do.pl - Dump the results of a select statement to stdout
+#   @(#) sql-do.pl - Issue a piece of non-select SQL
 #
-# Usage: sql-do.pl [-d database] 'statement'
+# Usage: sql-do.pl 'statement'
 #
 
 use strict;
@@ -10,7 +10,7 @@ use warnings;
 use DBI qw();
 use Getopt::Std qw(getopts);
 
-use vars qw($opt_d $opt_l $opt_p $opt_t);
+use vars qw($opt_l $opt_p $opt_t);
 
 my $driver = $ENV{DB_DRIVER} || 'mysql';
 my $host = $ENV{DB_HOST} || '';
@@ -22,12 +22,11 @@ if ($host) {
 	$options = "host=$host;" . $options;
 }
 
-getopts('d:l:pt');
+getopts('l:pt');
 
-my $database = $opt_d || $ENV{DB_DATABASE};
 my $statement = shift @ARGV || usage();
 
-my $dsn = $ENV{DB_DSN} || "DBI:$driver:database=$database;$options";
+my $dsn = $ENV{DB_DSN} || "DBI:$driver:$options";
 my $dbh = DBI->connect($dsn, $user, $password);
 
 if (!defined $dbh) {
