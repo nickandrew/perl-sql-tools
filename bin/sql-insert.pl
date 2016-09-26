@@ -42,9 +42,10 @@ if (!defined $dbh) {
 }
 
 my $line_number = 0;
+my $fields;
 
 chop($fields = <STDIN>);
-@fieldlist = split(/\|/, $fields);
+my @fieldlist = split(/\|/, $fields);
 
 $line_number++;
 
@@ -92,7 +93,7 @@ while (<STDIN>) {
 	chomp;
 	$line_number++;
 
-	$line = $_;
+	my $line = $_;
 	@data = split(/\|/);
 	@bound = ();
 	foreach (@fieldlist) {
