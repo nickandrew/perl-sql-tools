@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #   @(#) sql-export.pl - Dump the results of a select statement to stdout
 #
-# Usage: sql-export.pl [-d database] 'statement' > output
+# Usage: sql-export.pl [-l limit] [-d database] 'statement' > output
 #
 # Output file format:
 #   fieldname|fieldname|fieldname ...
@@ -69,7 +69,7 @@ while (defined ($row_hr = $sth->fetchrow_hashref())) {
 		print_pipe();
 	}
 
-	if ($opt_l > 0) {
+	if (defined $opt_l && $opt_l > 0) {
 		$opt_l--;
 		last if ($opt_l == 0);
 	}
